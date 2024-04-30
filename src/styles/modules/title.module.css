@@ -1,20 +1,3 @@
-/* @import '../mixins';
-.title {
-	display: inline-block;
-	width: 100%;
-	font-family: 'Poppins';
-	font-size: 4rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	text-align: center;
-	margin: 0 auto;
-	margin-top: 2rem;
-	margin-bottom: 1.5rem;
-	color: var(--black-1);
-	@include smallDeviceSize {
-		font-size: 3rem;
-	}
-} */
 .title {
     display: inline-block;
     width: 100%;
@@ -26,10 +9,11 @@
     margin: 0 auto;
     margin-top: 2rem;
     margin-bottom: 1.5rem;
-    color: var(--black-1);
+    color: var(--black-2);
+    /* color: black */
+    /* color: var(--primaryPurple) */
 }
 
-/* Media query for small devices */
 @media only screen and (max-width: 768px) {
     .title {
         font-size: 3rem;

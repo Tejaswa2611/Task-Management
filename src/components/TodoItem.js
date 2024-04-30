@@ -64,6 +64,9 @@ function TodoItem({ todo }) {
             <p className={styles.time}>
               {format(new Date(todo.time), 'p, MM/dd/yyyy')}
             </p>
+            <p className={styles.todoText}>
+              Priority : {todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
+            </p>
           </div>
         </div>
         <div className={styles.todoActions}>

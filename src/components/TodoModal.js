@@ -34,14 +34,17 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('incomplete');
+  const [priority, setPriority] = useState('low');
 
   useEffect(() => {
     if (type === 'update' && todo) {
       setTitle(todo.title);
       setStatus(todo.status);
+      setPriority(todo.priority);
     } else {
       setTitle('');
       setStatus('incomplete');
+      setPriority('low');
     }
   }, [type, todo, modalOpen]);
 
@@ -51,7 +54,7 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
       toast.error('Please enter a title');
       return;
     }
-    if (title && status) {
+    if (title && status && priority) {
       if (type === 'add') {
         dispatch(
           addTodo({
@@ -59,13 +62,14 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
             title,
             status,
             time: format(new Date(), 'p, MM/dd/yyyy'),
+            priority,
           })
         );
         toast.success('Task added successfully');
       }
       if (type === 'update') {
-        if (todo.title !== title || todo.status !== status) {
-          dispatch(updateTodo({ ...todo, title, status }));
+        if (todo.title !== title || todo.status !== status || todo.priority !== priority) {
+          dispatch(updateTodo({ ...todo, title, status,priority }));
           toast.success('Task Updated successfully');
         } else {
           toast.error('No changes made');
@@ -128,6 +132,18 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
                 >
                   <option value="incomplete">Incomplete</option>
                   <option value="complete">Completed</option>
+                </select>
+              </label>
+              <label htmlFor="priority">
+                Priority
+                <select
+                  id="priority"
+                  value={priority}
+                  onChange={(e) => setPriority(e.target.value)}
+                >
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
                 </select>
               </label>
               <div className={styles.buttonContainer}>
